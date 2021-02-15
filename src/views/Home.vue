@@ -1,5 +1,22 @@
 <template>
   <div class="home">
+    <div>
+      <h2>Add Movie:</h2>
+      Title:
+      <input type="text" v-model="newMovieTitle" />
+      <br />
+      Plot:
+      <input type="text" v-model="newMoviePlot" />
+      <br />
+      Year:
+      <input type="text" v-model="newMovieYear" />
+      <br />
+      <button v-on:click="createMovie">Add movie</button>
+    </div>
+    <!-- <div class="errors" v-for="error in errors" :key="error">
+      <p>{{ error }}</p>
+    </div> -->
+
     <h1>Movies</h1>
     <div v-for="movie in movies" v-bind:key="movie.id">
       <h2>{{ movie.title }}</h2>
@@ -19,9 +36,11 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      message: "Welcome to Vue.js!",
       movies: [],
       actors: [],
+      newMovieTitle: "",
+      newMoviePlot: "",
+      newMovieYear: "",
     };
   },
   created: function() {
@@ -29,25 +48,25 @@ export default {
   },
   methods: {
     indexMovies: function() {
-      axios.get("http://localhost:3000/api/movies").then(response => {
-        console.log(response.data);
-        this.movies = response.data;
-      });
+      axios
+        .get("http://localhost:3000/api/movies")
+        .then(response => {
+          console.log(response.data);
+          this.movies = response.data;
+        })
+        .catch(error => {
+          console.log(error.response.data);
+        });
     },
-    createMovies: function() {
+    createMovie: function() {
       var params = {
-        director,
-        english,
-        genres,
-        id,
-        plot,
-        title,
-        year,
+        title: this.newMovieTitle,
+        plot: this.newMoviePlot,
+        year: this.newMovieYear,
       };
       axios
-        .post("http://localhost:3000/api/movies".params)
+        .post("http://localhost:3000/api/movies", params)
         .then(response => {
-          this.movie = response.data;
           this.movies.push(response.data);
         })
         .catch(error => {
