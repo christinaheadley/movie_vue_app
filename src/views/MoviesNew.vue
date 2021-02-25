@@ -9,15 +9,15 @@
       </ul>
       <div class="form-group">
         <label>Title:</label>
-        <input type="text" class="form-control" v-model="newMovieTitle" />
+        <input type="text" class="form-control" v-model="newMovieTitle" autofocus placeholder="Enter Title Here" />
       </div>
       <div class="form-group">
         <label>Plot:</label>
-        <input type="text" class="form-control" v-model="newMoviePlot" />
+        <input type="text" class="form-control" v-model="newMoviePlot" placeholder="Enter Plot Here" />
       </div>
       <div class="form-group">
         <label>Year:</label>
-        <input type="text" class="form-control" v-model="newMovieYear" />
+        <input type="text" class="form-control" v-model="newMovieYear" placeholder="Enter Year Here" />
       </div>
       <input type="submit" class="btn btn-primary" value="Create" />
     </form>
